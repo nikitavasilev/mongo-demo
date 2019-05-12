@@ -40,7 +40,13 @@ async function createCourse() {
  * Logical operators:
  * or
  * and
+ *
+ * Regex:
+ * .find({ author: /^Mosh/ }) // starts with Mosh
+ * .find({ author: /Hamedani$/i }) // ends with Hamedani
  */
+
+// .find({ author: /.*Mosh.*/i }) // contains Mosh
 
 async function getCourses() {
   const courses = await Course
@@ -51,6 +57,7 @@ async function getCourses() {
     .or([{ author: 'Mosh' }, { isPublished: true }])
     .limit(10)
     .sort({ name: 1 })
+    // .count() instead of select, for the count of documents
     .select({ name: 1, tags: 1 });
   console.log(courses);
 }
